@@ -48,6 +48,7 @@ class ViewController: UIViewController {
                 let currentCenter : CGPoint = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
                 tile.center = currentCenter
                 tile.originCenter = currentCenter
+                tile.isUserInteractionEnabled = true
                 
                 self.tileCenterArray.add(currentCenter)
                 tile.backgroundColor = UIColor.red
@@ -79,6 +80,13 @@ class ViewController: UIViewController {
             (anyTile as! CustomLabel).center = randomCenter
             tempTileCenterArray.removeObject(at: randomIndex)
             
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let currentTouch : UITouch = touches.first!
+        if (self.tileArray.contains(currentTouch.view as Any)){
+            currentTouch.view?.alpha = 0
         }
     }
 }
