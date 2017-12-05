@@ -44,7 +44,7 @@ class ViewController: UIViewController {
         for _ in 0..<4{
             for _ in 0..<4{
                 // Crear cuadros
-                let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 4, height: self.tileWidth - 4)
+                let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 2, height: self.tileWidth - 2)
                 let tile : CustomLabel = CustomLabel(frame: tileFrame)
                 let currentCenter : CGPoint = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
                 tile.center = currentCenter
@@ -53,7 +53,16 @@ class ViewController: UIViewController {
                 
                 self.tileCenterArray.add(currentCenter)
                 tile.backgroundColor = UIColor.red
-                tile.text = String(tileNumber)
+                
+                
+//                tile.text = String(tileNumber)
+                if tileNumber <= 16{
+                    tile.backgroundColor = UIColor(patternImage: UIImage(named: "\(tileNumber).jpg")!)
+                }else{
+                    tile.backgroundColor = UIColor.darkGray
+                }
+                
+                
                 tile.textAlignment = NSTextAlignment.center
                 tile.font = UIFont.systemFont(ofSize: 24)
                 tileNumber += 1
@@ -85,16 +94,16 @@ class ViewController: UIViewController {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let currentTouch : UITouch = touches.first!
-        if (self.tileArray.contains(currentTouch.view as Any)){
+        let currentTouch : UITouch = touches.first! // recibimos el evento touch
+        if (self.tileArray.contains(currentTouch.view as Any)){ //verificamos que el touch sea sobre uno de los labels
 //            currentTouch.view?.alpha = 0
-            let touchLabel : CustomLabel = (currentTouch.view)  as! CustomLabel
+            let touchLabel : CustomLabel = (currentTouch.view)  as! CustomLabel // creamos un nuevo label
             
-            let xDif : CGFloat = touchLabel.center.x - self.tileEmptyCenter.x
+            let xDif : CGFloat = touchLabel.center.x - self.tileEmptyCenter.x // calculamos la diferencia entre el cuadro vacio y el label que se esta tocando
             let yDif : CGFloat = touchLabel.center.y - self.tileEmptyCenter.y
             
-            let distance : CGFloat = sqrt(pow(xDif, 2) + pow(yDif, 2))
-            if distance == self.tileWidth{
+            let distance : CGFloat = sqrt(pow(xDif, 2) + pow(yDif, 2))// obtenemos la distancia
+            if distance == self.tileWidth{ // solo si la distancia es igual a el ancho de un cuadro procedemos a intercambiar su posicion
                 let tempCenter : CGPoint = touchLabel.center
                 touchLabel.center = self.tileEmptyCenter
                 self.tileEmptyCenter = tempCenter
