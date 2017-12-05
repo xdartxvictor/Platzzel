@@ -46,7 +46,7 @@ class ViewController: UIViewController {
         for _ in 0..<4{
             for _ in 0..<4{
                 // Crear cuadros
-                let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 2, height: self.tileWidth - 2)
+                let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 1, height: self.tileWidth - 1)
                 let tile : CustomLabel = CustomLabel(frame: tileFrame)
                 let currentCenter : CGPoint = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
                 tile.center = currentCenter
