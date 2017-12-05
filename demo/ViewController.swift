@@ -17,7 +17,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        makeTiles()
+    }
+    
+    func makeTiles(){
         let boardWidth = self.board.frame.width // ancho del tablero
         self.tileWidth = boardWidth / 4   // ancho de cada cuadro para que puedan entrar 4 cuadros por cada fila
         
