@@ -25,13 +25,17 @@ class ViewController: UIViewController {
         self.tileCenterY = self.tileWidth / 2
         
         for _ in 0..<4{
-            // Crear cuadros
-            let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 4, height: self.tileWidth - 4)
-            let tile : UILabel = UILabel(frame: tileFrame)
-            tile.center = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
-            tile.backgroundColor = UIColor.red
-            self.board.addSubview(tile)
-            self.tileCenterX = self.tileCenterX + self.tileWidth
+            for _ in 0..<4{
+                // Crear cuadros
+                let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 4, height: self.tileWidth - 4)
+                let tile : UILabel = UILabel(frame: tileFrame)
+                tile.center = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
+                tile.backgroundColor = UIColor.red
+                self.board.addSubview(tile)
+                self.tileCenterX = self.tileCenterX + self.tileWidth
+            }
+            self.tileCenterX = self.tileWidth / 2
+            self.tileCenterY = self.tileCenterY + self.tileWidth
         }
     }
 }
