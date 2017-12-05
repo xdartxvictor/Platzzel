@@ -15,9 +15,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        let boardWidth = Int(self.board.frame.width) // ancho del tablero
+        self.tileWidth = boardWidth / 4   // ancho de cada cuadro para que puedan entrar 4 cuadros por cada fila
         // Crear cuadros
-        let tileFrame : CGRect = CGRect(x: 0, y: 0, width: 200, height: 200)
+        let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth, height: self.tileWidth)
         let tile : UILabel = UILabel(frame: tileFrame)
         tile.backgroundColor = UIColor.red
         self.board.addSubview(tile)
