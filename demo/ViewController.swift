@@ -17,6 +17,11 @@ class ViewController: UIViewController {
     var tileArray : NSMutableArray = []
     var tileCenterArray : NSMutableArray = []
     
+    
+    @IBAction func btnReset(_ sender: Any) {
+        randomTiles()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -66,12 +71,13 @@ class ViewController: UIViewController {
     }
     
     func randomTiles(){
+        let tempTileCenterArray : NSMutableArray = self.tileCenterArray.mutableCopy() as! NSMutableArray
         for anyTile in self.tileArray{
-            let randomIndex : Int = Int(arc4random()) % self.tileCenterArray.count// obtenemos aleatoriamente un centro de nuestro array
-            let randomCenter : CGPoint = self.tileCenterArray[randomIndex] as! CGPoint
+            let randomIndex : Int = Int(arc4random()) % tempTileCenterArray.count// obtenemos aleatoriamente un centro de nuestro array
+            let randomCenter : CGPoint = tempTileCenterArray[randomIndex] as! CGPoint
             
             (anyTile as! CustomLabel).center = randomCenter
-            self.tileCenterArray.removeObject(at: randomIndex)
+            tempTileCenterArray.removeObject(at: randomIndex)
             
         }
     }
