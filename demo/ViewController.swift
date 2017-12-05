@@ -14,6 +14,9 @@ class ViewController: UIViewController {
     var tileCenterX : CGFloat = 0.0
     var tileCenterY : CGFloat = 0.0
     
+    var tileArray : NSMutableArray = []
+    var tileCenterArray : NSMutableArray = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -27,19 +30,35 @@ class ViewController: UIViewController {
         self.tileCenterX = self.tileWidth / 2
         self.tileCenterY = self.tileWidth / 2
         
+        var tileNumber : Int = 1
+        
         for _ in 0..<4{
             for _ in 0..<4{
                 // Crear cuadros
                 let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 4, height: self.tileWidth - 4)
                 let tile : UILabel = UILabel(frame: tileFrame)
-                tile.center = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
+                let currentCenter : CGPoint = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
+                tile.center = currentCenter
+                
+                self.tileCenterArray.add(currentCenter)
                 tile.backgroundColor = UIColor.red
+                tile.text = String(tileNumber)
+                tile.textAlignment = NSTextAlignment.center
+                tile.font = UIFont.systemFont(ofSize: 24)
+                tileNumber += 1
+                
                 self.board.addSubview(tile)
+                
+                self.tileArray.add(tile)
+                
                 self.tileCenterX = self.tileCenterX + self.tileWidth
             }
             self.tileCenterX = self.tileWidth / 2
             self.tileCenterY = self.tileCenterY + self.tileWidth
         }
+        let lastTile : UILabel = self.tileArray.lastObject as! UILabel
+        lastTile.removeFromSuperview()
+        self.tileArray.removeObject(at: 15)
     }
 }
 
