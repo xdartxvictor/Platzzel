@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     var tileArray : NSMutableArray = []
     var tileCenterArray : NSMutableArray = []
+    var tileEmptyCenter : CGPoint = CGPoint(x: 0, y: 0)
     
     
     @IBAction func btnReset(_ sender: Any) {
@@ -79,14 +80,25 @@ class ViewController: UIViewController {
             
             (anyTile as! CustomLabel).center = randomCenter
             tempTileCenterArray.removeObject(at: randomIndex)
-            
         }
+        self.tileEmptyCenter = tempTileCenterArray[0] as! CGPoint
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let currentTouch : UITouch = touches.first!
         if (self.tileArray.contains(currentTouch.view as Any)){
-            currentTouch.view?.alpha = 0
+//            currentTouch.view?.alpha = 0
+            let touchLabel : CustomLabel = (currentTouch.view)  as! CustomLabel
+            
+            let xDif : CGFloat = touchLabel.center.x - self.tileEmptyCenter.x
+            let yDif : CGFloat = touchLabel.center.y - self.tileEmptyCenter.y
+            
+            let distance : CGFloat = sqrt(pow(xDif, 2) + pow(yDif, 2))
+            if distance == self.tileWidth{
+                let tempCenter : CGPoint = touchLabel.center
+                touchLabel.center = self.tileEmptyCenter
+                self.tileEmptyCenter = tempCenter
+            }
         }
     }
 }
