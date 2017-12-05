@@ -21,6 +21,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         makeTiles()
+        randomTiles()
     }
     
     func makeTiles(){
@@ -62,6 +63,17 @@ class ViewController: UIViewController {
         let lastTile : UILabel = self.tileArray.lastObject as! UILabel
         lastTile.removeFromSuperview()
         self.tileArray.removeObject(at: 15)
+    }
+    
+    func randomTiles(){
+        for anyTile in self.tileArray{
+            let randomIndex : Int = Int(arc4random()) % self.tileCenterArray.count// obtenemos aleatoriamente un centro de nuestro array
+            let randomCenter : CGPoint = self.tileCenterArray[randomIndex] as! CGPoint
+            
+            (anyTile as! CustomLabel).center = randomCenter
+            self.tileCenterArray.removeObject(at: randomIndex)
+            
+        }
     }
 }
 
