@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     var tileCenterArray : NSMutableArray = []
     var tileEmptyCenter : CGPoint = CGPoint(x: 0, y: 0)
     
+    var tilesCount : Int = 0
+    
     
     @IBAction func btnReset(_ sender: Any) {
         randomTiles()
@@ -105,7 +107,16 @@ class ViewController: UIViewController {
             let distance : CGFloat = sqrt(pow(xDif, 2) + pow(yDif, 2))// obtenemos la distancia
             if distance == self.tileWidth{ // solo si la distancia es igual a el ancho de un cuadro procedemos a intercambiar su posicion
                 let tempCenter : CGPoint = touchLabel.center
+                UIView.beginAnimations(nil, context: nil)
+                UIView.setAnimationDuration(0.2)
+                
                 touchLabel.center = self.tileEmptyCenter
+                
+                UIView.commitAnimations()
+                
+                if (touchLabel.originCenter == self.tileEmptyCenter){
+                    // manejar correcto
+                }
                 self.tileEmptyCenter = tempCenter
             }
         }
