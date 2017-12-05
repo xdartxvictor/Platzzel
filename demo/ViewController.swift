@@ -24,6 +24,8 @@ class ViewController: UIViewController {
     }
     
     func makeTiles(){
+        self.tileArray = []
+        self.tileCenterArray = []
         let boardWidth = self.board.frame.width // ancho del tablero
         self.tileWidth = boardWidth / 4   // ancho de cada cuadro para que puedan entrar 4 cuadros por cada fila
         
@@ -36,9 +38,10 @@ class ViewController: UIViewController {
             for _ in 0..<4{
                 // Crear cuadros
                 let tileFrame : CGRect = CGRect(x: 0, y: 0, width: self.tileWidth - 4, height: self.tileWidth - 4)
-                let tile : UILabel = UILabel(frame: tileFrame)
+                let tile : CustomLabel = CustomLabel(frame: tileFrame)
                 let currentCenter : CGPoint = CGPoint(x: self.tileCenterX, y: self.tileCenterY)
                 tile.center = currentCenter
+                tile.originCenter = currentCenter
                 
                 self.tileCenterArray.add(currentCenter)
                 tile.backgroundColor = UIColor.red
@@ -60,5 +63,9 @@ class ViewController: UIViewController {
         lastTile.removeFromSuperview()
         self.tileArray.removeObject(at: 15)
     }
+}
+
+class CustomLabel : UILabel{
+    var originCenter : CGPoint = CGPoint(x: 0, y: 0)
 }
 
