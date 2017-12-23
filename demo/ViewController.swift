@@ -55,12 +55,12 @@ class ViewController: UIViewController {
                 tile.backgroundColor = UIColor.red
                 
                 
-//                tile.text = String(tileNumber)
-                if tileNumber <= 16{
-                    tile.backgroundColor = UIColor(patternImage: UIImage(named: "\(tileNumber).jpg")!)
-                }else{
-                    tile.backgroundColor = UIColor.darkGray
-                }
+                tile.text = String(tileNumber)
+//                if tileNumber <= 16{
+//                    tile.backgroundColor = UIColor(patternImage: UIImage(named: "\(tileNumber).jpg")!)
+//                }else{
+//                    tile.backgroundColor = UIColor.darkGray
+//                }
                 
                 
                 tile.textAlignment = NSTextAlignment.center
